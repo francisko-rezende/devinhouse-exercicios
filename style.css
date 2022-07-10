@@ -61,7 +61,7 @@ p {
 }
 
 .main {
-  position: none;
+  min-height: 87.3vh;
 }
 
 .nav {
@@ -86,4 +86,10 @@ p {
 .nav a:hover {
   background-color: lightgoldenrodyellow;
   color: rebeccapurple;
+}
+
+.footer {
+  background-color: #BC4A3C ;
+  padding: 1rem;
+  color: white;
 }
