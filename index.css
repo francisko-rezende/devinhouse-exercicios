@@ -59,7 +59,7 @@ body {
 }
 
 .img-wrapper img {
-  max-width: 100%;
+  width: 100%;
   display: block;
   height: 100%;
   object-fit: cover;
@@ -81,6 +81,8 @@ body {
 
 .nav ul {
   list-style: none;
+  display: flex;
+  gap: 1rem;
 }
 
 .nav a {
@@ -94,7 +96,27 @@ body {
   justify-content: space-between;
 }
 
-.nav ul {
-  display: flex;
-  gap: 1rem;
+.other-events {
+  margin-top: 60px;
 }
+
+.event-list {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.card {
+  flex: 1;
+  width: 300px;
+  min-width: 280px;
+  display: grid;
+  gap: 1rem;
+  grid-template-rows: 300px 1fr;
+  box-shadow: var(--shadow-elevation-medium);
+  background-color: #fff;
+  border-radius: 10px;
+}
+
