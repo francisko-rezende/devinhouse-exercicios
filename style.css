@@ -7,6 +7,8 @@
   font-size: 20px;
   color: brown;
   text-align: center;
+  background-image: url('./img/andes.jpg');
+  background-position: center;
 }
 
 body {
