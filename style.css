@@ -80,4 +80,10 @@ p {
 .nav a {
   color: white;
   padding-top: ;
+  transition: all 300ms;
+}
+
+.nav a:hover {
+  background-color: lightgoldenrodyellow;
+  color: rebeccapurple;
 }
