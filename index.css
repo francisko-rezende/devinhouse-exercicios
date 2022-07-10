@@ -144,8 +144,28 @@ body {
   border-radius: 10px;
   color: rgb(72, 48, 80);
   transition: background-color 300ms;
+  cursor: pointer;
 }
 
 .submit-button:hover {
   background-color: #fccff1;
+  
+}
+
+.footer ul {
+  list-style-type: none;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.copyright {
+  grid-column: 1/-1;
 }
