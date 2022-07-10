@@ -80,20 +80,20 @@
       <form class="contact-form">
         <div class="form-field">
           <label for="nome">Nome</label>
-          <input type="text" name="nome" id="nome">
+          <input type="text" name="nome" id="nome" required>
         </div>
 
         <div class="form-field">
-          <label for="senha">Senha</label>
-          <input type="password" name="senha" id="senha">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" required>
         </div>
 
         <div class="form-field">
           <label for="descricao">Descrição</label>
-          <textarea name="descricao" id="descricao" cols="30" rows="10"></textarea>
+          <textarea name="descricao" id="descricao" cols="30" rows="10" required></textarea>
         </div>
 
-        <button class="submit-button">Enviar</button>
+        <button type="submit" class="submit-button">Enviar</button>
       </form>
     </section>
   </main>
@@ -114,6 +114,7 @@
     </section>
     <section class="copyright">Kiwi © todos os direitos reservados</section>
   </footer>
+  <script src="./app.js"></script>
 </body>
 
 </html>
