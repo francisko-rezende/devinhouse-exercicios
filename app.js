@@ -1,17 +1,10 @@
-let counterValue = 0;
-const decreaseValue = document.querySelector('[data-js="decrease-btn"]');
-const increaseValue = document.querySelector('[data-js="increase-btn"]');
-const resultParagraph = document.querySelector('[data-js="result-paragraph"]');
+const form = document.querySelector("form");
 
-const updateCounter = (operation) => {
-  if (operation === "+") resultParagraph.textContent = ++counterValue;
-  if (operation === "-") resultParagraph.textContent = --counterValue;
-};
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-decreaseValue.addEventListener("click", () => {
-  updateCounter("-");
-});
+  const titleElement = document.querySelector("h1");
+  const newTitle = form["novo titulo"].value;
 
-increaseValue.addEventListener("click", () => {
-  updateCounter("+");
+  titleElement.textContent = newTitle;
 });
