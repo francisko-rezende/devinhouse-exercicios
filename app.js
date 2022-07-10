@@ -1,6 +1,17 @@
-const currentYear = new Date().getFullYear();
-const userYear = parseInt(prompt("Digite um ano, por favor"));
+let counterValue = 0;
+const decreaseValue = document.querySelector('[data-js="decrease-btn"]');
+const increaseValue = document.querySelector('[data-js="increase-btn"]');
+const resultParagraph = document.querySelector('[data-js="result-paragraph"]');
 
-const difference = userYear - currentYear;
+const updateCounter = (operation) => {
+  if (operation === "+") resultParagraph.textContent = ++counterValue;
+  if (operation === "-") resultParagraph.textContent = --counterValue;
+};
 
-alert(`A diferença entre o ano digitado e o ano atual é de ${difference}`);
+decreaseValue.addEventListener("click", () => {
+  updateCounter("-");
+});
+
+increaseValue.addEventListener("click", () => {
+  updateCounter("+");
+});
