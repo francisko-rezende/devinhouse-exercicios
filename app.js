@@ -19,3 +19,21 @@ const listaDeConvidados = [
   convidado5,
   convidado6,
 ];
+
+const liberarBebida = listaDeConvidados => {
+  let novaListaDeConvidados = []
+  
+  listaDeConvidados.forEach((convidado) => {
+    if (convidado.idade > 17) {
+      convidado.openBar = true
+    } else {
+      convidado.openBar = false
+    }
+
+    novaListaDeConvidados.push(convidado)
+  });
+
+  return novaListaDeConvidados
+}
+
+const convidadosComBebidasProcessada = liberarBebida(listaDeConvidados)
