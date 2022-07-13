@@ -5,7 +5,7 @@ const convidado3 = {
   sobrenome: "dos Santos",
   setor: "arquibancada",
   idade: 20,
-},
+}
 const convidado4 = { nome: "Isaias", sobrenome: "Felizardo", setor: "arquibancada", idade: 16 }
 const convidado5 = { nome: "Anidelci", sobrenome: "Forti", setor: "pista", idade: 20 }
 const convidado6 = { nome: "Janaina", sobrenome: "Matias", setor: "pista", idade: 16 }
