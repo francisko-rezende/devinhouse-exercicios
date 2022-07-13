@@ -1,25 +1,13 @@
-const numero1 = prompt('Digite um número')
-const operacao = prompt('Digite uma operação (+, -, * ou /')
-const numero2 = prompt('Digite outro número')
-
-switch (operacao) {
-  case '+':
-    console.log(`${Number(numero1) + Number(numero2)}`)
-    break;
-  
-  case '-':
-    console.log(`${Number(numero1) - Number(numero2)}`)
-    break
-
-  case '*':
-    console.log(`${Number(numero1) * Number(numero2)}`)
-    break
-
-  case '/':
-    console.log(`${Number(numero1) / Number(numero2)}`)
-    break
-
-  default:
-    console.log('Operação inválida')
-    break;
-}
+const invitedPeople = [
+  { nome: "Gasparino", sobrenome: "Pereira", setor: "camarote", idade: 20 },
+  { nome: "Maria", sobrenome: "Aparecida", setor: "camarote", idade: 16 },
+  {
+    nome: "Rosangela",
+    sobrenome: "dos Santos",
+    setor: "arquibancada",
+    idade: 20,
+  },
+  { nome: "Isaias", sobrenome: "Felizardo", setor: "arquibancada", idade: 16 },
+  { nome: "Anidelci", sobrenome: "Forti", setor: "pista", idade: 20 },
+  { nome: "Janaina", sobrenome: "Matias", setor: "pista", idade: 16 },
+];
