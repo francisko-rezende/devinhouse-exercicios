@@ -1,18 +1,25 @@
-var listaConvidados = [
-  { nome: "José", sobrenome: "Carlos" },
-  { nome: "Alessandro", sobrenome: "Viana" },
-  { nome: "Paula", sobrenome: "Souza" },
-  { nome: "Cristian", sobrenome: "Schimit" },
-  { nome: "Beatriz", sobrenome: "Viana" },
-  { nome: "Fernanda", sobrenome: "Silveira" },
-  { nome: "Cláudia", sobrenome: "Torres" },
-  { nome: "Augusto", sobrenome: "Cesar" },
-  { nome: "Noemi", sobrenome: "Nakamura" },
-  { nome: "Pedro", sobrenome: "Lobo" },
-];
+const numero1 = prompt('Digite um número')
+const operacao = prompt('Digite uma operação (+, -, * ou /')
+const numero2 = prompt('Digite outro número')
 
-let ul = document.querySelector('ul')
+switch (operacao) {
+  case '+':
+    console.log(`${Number(numero1) + Number(numero2)}`)
+    break;
+  
+  case '-':
+    console.log(`${Number(numero1) - Number(numero2)}`)
+    break
 
-listaConvidados.forEach((convidado) => {
-  ul.innerHTML += `<li>${convidado.nome} ${convidado.sobrenome}</li>`
-})
+  case '*':
+    console.log(`${Number(numero1) * Number(numero2)}`)
+    break
+
+  case '/':
+    console.log(`${Number(numero1) / Number(numero2)}`)
+    break
+
+  default:
+    console.log('Operação inválida')
+    break;
+}
