@@ -1,6 +1,18 @@
-var listaNumeros = [ 2, 3, 9, 12, 16, 55, 90, 78, 17 ]
+var listaConvidados = [
+  { nome: "José", sobrenome: "Carlos" },
+  { nome: "Alessandro", sobrenome: "Viana" },
+  { nome: "Paula", sobrenome: "Souza" },
+  { nome: "Cristian", sobrenome: "Schimit" },
+  { nome: "Beatriz", sobrenome: "Viana" },
+  { nome: "Fernanda", sobrenome: "Silveira" },
+  { nome: "Cláudia", sobrenome: "Torres" },
+  { nome: "Augusto", sobrenome: "Cesar" },
+  { nome: "Noemi", sobrenome: "Nakamura" },
+  { nome: "Pedro", sobrenome: "Lobo" },
+];
 
-listaNumeros.forEach((numero, index) => {
-  const dobro = numero * 2
-  listaNumeros[index] = dobro
+let ul = document.querySelector('ul')
+
+listaConvidados.forEach((convidado) => {
+  ul.innerHTML += `<li>${convidado.nome} ${convidado.sobrenome}</li>`
 })
