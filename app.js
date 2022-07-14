@@ -71,3 +71,24 @@ const convidadosComBebidasProcessada = liberarBebida(listaDeConvidados);
 const listaCamarote = separarCamarote(convidadosComBebidasProcessada)
 const listaPista = separarPista(convidadosComBebidasProcessada)
 const listaArquibancada = separarArquibancada(convidadosComBebidasProcessada)
+
+const elementoListaCamarote = document.querySelector('[data-js="lista camarote"]')
+const elementoListaArquibancada = document.querySelector('[data-js="lista arquibancada"]')
+const elementoListaPista = document.querySelector('[data-js="lista pista"]')
+
+const criaItemsDaListaCamarote = item => {
+  const newItem = `<li>${item.nome} ${item.sobrenome}</li>`
+  elementoListaCamarote.innerHTML += newItem
+}
+const criaItemsDaListaArquibancada = item => {
+  const newItem = `<li>${item.nome} ${item.sobrenome}</li>`
+  elementoListaArquibancada.innerHTML += newItem
+}
+const criaItemsDaListaPista = item => {
+  const newItem = `<li>${item.nome} ${item.sobrenome}</li>`
+  elementoListaPista.innerHTML += newItem
+}
+
+listaCamarote.forEach(criaItemsDaListaCamarote)
+listaArquibancada.forEach(criaItemsDaListaArquibancada)
+listaPista.forEach(criaItemsDaListaPista)
