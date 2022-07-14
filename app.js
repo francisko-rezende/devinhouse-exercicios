@@ -44,6 +44,13 @@ const listaDeConvidados = [
   convidado6,
 ];
 
+const separarCamarote = (lista) =>
+lista.filter((item) => item.setor === "camarote");
+const separarPista = (lista) =>
+lista.filter((item) => item.setor === "pista");
+const separarArquibancada = (lista) =>
+lista.filter((item) => item.setor === "arquibancada");
+
 const liberarBebida = (listaDeConvidados) => {
   let novaListaDeConvidados = [];
 
@@ -60,3 +67,7 @@ const liberarBebida = (listaDeConvidados) => {
 };
 
 const convidadosComBebidasProcessada = liberarBebida(listaDeConvidados);
+
+const listaCamarote = separarCamarote(convidadosComBebidasProcessada)
+const listaPista = separarPista(convidadosComBebidasProcessada)
+const listaArquibancada = separarArquibancada(convidadosComBebidasProcessada)
