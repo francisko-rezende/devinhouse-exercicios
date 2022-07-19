@@ -77,15 +77,36 @@ const elementoListaArquibancada = document.querySelector('[data-js="lista arquib
 const elementoListaPista = document.querySelector('[data-js="lista pista"]')
 
 const criaItemsDaListaCamarote = item => {
-  const newItem = `<li>${item.nome} ${item.sobrenome}</li>`
+  const deveTerEmoji = item.openBar
+  let newItem 
+  
+  if (deveTerEmoji) {
+    newItem = `<li>${item.nome} ${item.sobrenome} 🍹</li>`
+  } else {
+    newItem = `<li>${item.nome} ${item.sobrenome}</li>`
+  }
   elementoListaCamarote.innerHTML += newItem
 }
 const criaItemsDaListaArquibancada = item => {
-  const newItem = `<li>${item.nome} ${item.sobrenome}</li>`
+  const deveTerEmoji = item.openBar
+  let newItem 
+  
+  if (deveTerEmoji) {
+    newItem = `<li>${item.nome} ${item.sobrenome} 🍹</li>`
+  } else {
+    newItem = `<li>${item.nome} ${item.sobrenome}</li>`
+  }
   elementoListaArquibancada.innerHTML += newItem
 }
 const criaItemsDaListaPista = item => {
-  const newItem = `<li>${item.nome} ${item.sobrenome}</li>`
+  const deveTerEmoji = item.openBar
+  let newItem 
+  
+  if (deveTerEmoji) {
+    newItem = `<li>${item.nome} ${item.sobrenome} 🍹</li>`
+  } else {
+    newItem = `<li>${item.nome} ${item.sobrenome}</li>`
+  }
   elementoListaPista.innerHTML += newItem
 }
 

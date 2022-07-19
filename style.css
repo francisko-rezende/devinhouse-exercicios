@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Fira Sans', sans-serif;
+}
+
+.title {
+  background: hsla(216, 20%, 45%, 1);
+  color: hsla(0, 0%, 100%, 1);
+  padding: 14px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.lists-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+  margin: 29px auto;
+  justify-content: space-around;
+  max-width: 1126px;
+}
+
+.list-wrapper {
+  border: 1px solid hsla(0, 0%, 0%, 0.4);
+  padding: 10px 24px;
+  height: 600px;
+}
