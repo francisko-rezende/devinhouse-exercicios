@@ -51,3 +51,21 @@ const saca = (valorSacado, idConta) => {
   diminuiSaldo(conta, valorSacado);
   alert(`Saque realizado com sucesso! Seu novo saldo é ${conta.saldo}`);
 };
+
+const aumentaSaldo = (conta, valorAcrescentado) => {
+  conta.saldo += valorAcrescentado;
+};
+
+const deposita = (valorDepositado, idConta) => {
+  const conta = contasClientes.find((conta) => conta.id === idConta);
+
+  const ehValorInvalido = valorDepositado <= 0;
+
+  if (ehValorInvalido) {
+    alert("Valor inválido.");
+    return;
+  }
+
+  aumentaSaldo(conta, valorDepositado);
+  alert(`O depósito ocorreu com sucesso. Seu saldo é de ${conta.saldo}`);
+};
