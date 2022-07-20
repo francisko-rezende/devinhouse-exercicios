@@ -7,20 +7,20 @@
   <title>Banco Nacional de Tagamandápio</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body onload="addAccountsToSelect()">
+<body onload="insereContasNoSelect()">
   <main>
     <h2>Faça uma operação</h2>
     <form>
-      <label for="account">Conta</label>
-      <select name="account" id="account"></select>
+      <label for="conta">Conta</label>
+      <select name="conta" id="conta"></select>
 
-      <label for="amount">Valor</label>
-      <input type="text" id="amount" name="amount">
+      <label for="valor">Valor</label>
+      <input type="text" id="valor" name="valor">
 
       <label for="transaction">Operação</label>
       <select name="transaction" id="transaction">
-        <option value="withdrawal">Saque</option>
-        <option value="deposit">Depósito</option>
+        <option value="Saque">Saque</option>
+        <option value="Depósito">Depósito</option>
       </select>
 
       <button type="submit">Confirmar</button>

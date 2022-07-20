@@ -16,10 +16,38 @@ const contasClientes = [
   },
 ];
 
-const accountSelect = document.querySelector("#account");
+const selectContas = document.querySelector("#conta");
+const formulario = document.querySelector("form");
+const inputValor = document.querySelector("#valor");
+const selectOperacao = document.querySelector("#transaction");
 
-const addAccountsToSelect = () => {
+const insereContasNoSelect = () => {
   contasClientes.forEach((conta) => {
-    accountSelect.innerHTML += `<option value="${conta.nome}">${conta.id}</option>`;
+    selectContas.innerHTML += `<option value="${conta.id}">${conta.id}</option>`;
   });
+};
+
+const diminuiSaldo = (conta, valorASubtrair) => {
+  conta.saldo -= valorASubtrair;
+};
+
+const saca = (valorSacado, idConta) => {
+  const conta = contasClientes.find((conta) => conta.id === idConta);
+  const saldo = conta.saldo;
+
+  const ehValorInvalido = valorSacado <= 0;
+  const ehSaldoInsuficiente = valorSacado > saldo;
+
+  if (ehValorInvalido) {
+    alert("Valor inválido.");
+    return;
+  }
+
+  if (ehSaldoInsuficiente) {
+    alert(`Saldo insuficiente. Seu saldo é ${conta.saldo}`);
+    return;
+  }
+
+  diminuiSaldo(conta, valorSacado);
+  alert(`Saque realizado com sucesso! Seu novo saldo é ${conta.saldo}`);
 };
