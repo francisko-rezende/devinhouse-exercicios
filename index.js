@@ -69,3 +69,30 @@ const deposita = (valorDepositado, idConta) => {
   aumentaSaldo(conta, valorDepositado);
   alert(`O depósito ocorreu com sucesso. Seu saldo é de ${conta.saldo}`);
 };
+
+const executaOperacao = (e) => {
+  e.preventDefault();
+
+  const idConta = Number(selectContas.value);
+  const valor = Number(inputValor.value);
+  const ehSaque = selectOperacao.value === "Saque";
+  const ehDeposito = selectOperacao.value === "Depósito";
+  const contaFoiEncontrada = contasClientes.some((conta) => conta.id === idConta)
+
+  if (!contaFoiEncontrada) {
+    alert("Conta não encontrada");
+    return;
+  }
+
+  if (ehSaque) {
+    saca(valor, idConta);
+    return;
+  }
+
+  if (ehDeposito) {
+    deposita(valor, idConta);
+    return;
+  }
+};
+
+formulario.addEventListener("submit", executaOperacao);

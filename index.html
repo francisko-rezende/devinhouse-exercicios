@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,27 +8,32 @@
   <title>Banco Nacional de Tagamandápio</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body onload="insereContasNoSelect()">
   <main>
     <h2>Faça uma operação</h2>
     <form>
       <label for="conta">Conta</label>
-      <select name="conta" id="conta"></select>
+      <select name="conta" id="conta" required>
+        <option value="" disabled selected>Selecione uma conta</option>
+      </select>
 
       <label for="valor">Valor</label>
-      <input type="text" id="valor" name="valor">
+      <input type="text" id="valor" name="valor" required>
 
       <label for="transaction">Operação</label>
-      <select name="transaction" id="transaction">
+      <select name="transaction" id="transaction" required>
+        <option value="" disabled selected>Selecione uma operação</option>
         <option value="Saque">Saque</option>
         <option value="Depósito">Depósito</option>
       </select>
 
       <button type="submit">Confirmar</button>
     </form>
-    
+
   </main>
-  
+
   <script src="./index.js"></script>
 </body>
+
 </html>
