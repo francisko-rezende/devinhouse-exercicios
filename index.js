@@ -3,16 +3,19 @@ const contasClientes = [
     id: 1,
     nome: "Cliente 01",
     saldo: 500,
+    senha: 123
   },
   {
     id: 2,
     nome: "Cliente 02",
     saldo: 3000,
+    senha: 456
   },
   {
     id: 3,
     nome: "Cliente 03",
     saldo: 5000,
+    senha: 789
   },
 ];
 
@@ -78,6 +81,15 @@ const executaOperacao = (e) => {
   const ehSaque = selectOperacao.value === "Saque";
   const ehDeposito = selectOperacao.value === "Depósito";
   const contaFoiEncontrada = contasClientes.some((conta) => conta.id === idConta)
+  const senha = document.querySelector('#senha').value
+  const conta = contasClientes.find((conta) => conta.id === idConta);
+
+  const ehASenhaCorreta = conta.senha === senha
+
+  if (!ehASenhaCorreta) {
+    alert('Senha inválida')
+    return
+  }
 
   if (!contaFoiEncontrada) {
     alert("Conta não encontrada");
