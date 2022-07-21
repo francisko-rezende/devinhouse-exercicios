@@ -1,31 +1,41 @@
-const form = document.querySelector("form");
-const ageInput = document.querySelector("input");
+const dateInput = document.querySelector('input')
 
-const getAgeClassification = (age) => {
-  if (age >= 0 && age <= 15) {
-    return "Jovem";
+handleChange = () => {
+  const chosenDate = new Date(dateInput.value).getTime()
+  const isSummer =  chosenDate >= new Date(2021, 11, 22).getTime() && chosenDate <= new Date(2022, 02, 21).getTime()
+  const isFall =  chosenDate >= new Date(2022, 02, 22).getTime() && chosenDate <= new Date(2022, 05, 21).getTime()
+  const isWinter =  chosenDate >= new Date(2022, 05, 22).getTime() && chosenDate <= new Date(2022, 08, 21).getTime()
+  const isSpring =  chosenDate >= new Date(2022, 08, 22).getTime() && chosenDate <= new Date(2022, 11, 21).getTime()
+
+  let seasonParagraph = document.querySelector('p')
+
+  const insertSeasonMessage = (message) => seasonParagraph.textContent = message
+
+  if (!seasonParagraph) {
+    seasonParagraph = document.createElement('p')
+    document.body.appendChild(seasonParagraph)
+  }
+  
+  if (isSummer) {
+    insertSeasonMessage('É verão 🌞')
+    return
+  }
+ 
+  if (isFall) {
+    insertSeasonMessage('É outono 🍂')
+    return
+  }
+  
+  if (isWinter) {
+    insertSeasonMessage('É inverno ☃️')
+    return
   }
 
-  if (age >= 16 && age <= 64) {
-    return "Adulto";
+  if (isSpring) {
+    insertSeasonMessage('É primavera 🌻')
+    return
   }
 
-  return "Idoso";
-};
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const age = Number(document.querySelector("input").value);
-
-  const resultText = document.querySelector('[data-js="result"]');
-
-  if (!resultText) {
-    const resultTextElement = document.createElement("p");
-    resultTextElement.setAttribute("data-js", "result");
-    resultTextElement.textContent = getAgeClassification(age);
-    document.body.appendChild(resultTextElement);
-    return;
-  }
-
-  resultText.textContent = getAgeClassification(age);
-});
+  seasonParagraph.textContent = 'Não sei a estação dessa data, tenta um dia entre 22 de Dezembro de 2021 e 21 de Dezembro de 2022'
+  
+}
