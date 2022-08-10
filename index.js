@@ -25,15 +25,18 @@ class Pedido {
   }
 
   calcularTotal() {
-    const getTotalPrice = (acc, { preco, quantidade }) => preco * quantidade;
+    const getTotalPrice = (acc, { preco, quantidade }) =>
+      acc + preco * quantidade;
 
-    return this.listaProdutos.reduce(getTotalPrice, 0);
+    const precoTotal = this.listaProdutos.reduce(getTotalPrice, 0);
+
+    return precoTotal;
   }
 }
 
 const sapato = new Produto("nike", 70, true, 5);
 const garrafa = new Produto("squeeze", 20, true, 3);
-const caneca = new Produto("richard", 12, true, 30);
+const caneca = new Produto("copo stanley", 300, true, 30);
 const monitor = new Produto("samsung", 500, true, 10);
 const mouse = new Produto("magic", 10, false, 10);
 
@@ -46,3 +49,35 @@ primeiroPedido.adicionarProduto(caneca);
 
 segundoPedido.adicionarProduto(monitor);
 segundoPedido.adicionarProduto(mouse);
+
+function geraElementoPedido(pedido) {
+  return `<li>
+  <article>
+    <div>
+      <h2>Pedido n. <strong>${pedido.numeroPedido}</strong></h2>
+      <span>Data: <time datetime="${pedido.dataPedido}">${
+    pedido.dataPedido
+  }</time></span>
+    </div>
+    <ul>
+      <li><strong>Cliente:</strong>${pedido.nomeCliente}</li>
+      <li><strong>Valor total:</strong>${pedido.calcularTotal()}</li>
+      <li><strong>Está pago?</strong>${pedido.estaPago}</li>
+      <li>Produtos: <ul>${pedido.listaProdutos.reduce(
+        (acc, { nome, quantidade, preco }) =>
+          acc +
+          `<li>${nome} - Quantidade ${quantidade}- Valor un. R$ ${preco}</li>`,
+        ""
+      )}
+        </ul>
+      </li>
+    </ul>
+  </article>
+  </li>`;
+}
+
+const listaDePedidos = document.querySelector('[data-js="lista-de-pedidos"]');
+
+[primeiroPedido, segundoPedido].forEach((pedido) => {
+  listaDePedidos.innerHTML += geraElementoPedido(pedido);
+});
