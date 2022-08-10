@@ -1,3 +1,4 @@
-const sleep = (val) => new Promise((res) => setTimeout(() => res(val), 3000));
-
-sleep("Olá marilene").then((res) => console.log(res));
+setInterval(() => {
+  const now = new Date();
+  console.log(now.toLocaleTimeString("pt-BR"));
+}, 2 * 1000);
