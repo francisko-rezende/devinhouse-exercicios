@@ -6,6 +6,7 @@ const app = express();
 app.use(express.json());
 
 let pizzas = [];
+let solicitations = [];
 
 const pizzaSchema = yup.object({
   name: yup.string().required("Nome é obrigatório"),
@@ -15,6 +16,34 @@ const pizzaSchema = yup.object({
     .array()
     .of(yup.string())
     .min(1, "Pelo menos um ingrediente é obrigatório"),
+});
+
+const solicitationSchema = yup.object({
+  client: yup.string().required("Nome do cliente é obrigatório"),
+  document: yup.string().required("Documento do cliente é obrigatório"),
+  address: yup.string().required("Endereço do cliente é obrigatório"),
+  phoneNumber: yup.string().required("Número de telefone é obrigatório"),
+  paymentMethod: yup.string().required("Método de pagamento é obrigatório"),
+  notes: yup.string(),
+  orders: yup.array().of(pizzaSchema),
+});
+
+app.get("/solicitations", (req, res) => {
+  res.status(200).json(solicitations);
+});
+
+app.post("/solicitations", async (req, res) => {
+  try {
+    const { body } = req;
+
+    await solicitationSchema.validate(body);
+
+    const solicitation = { id: uuidv4(), ...body, orders: pizzas };
+    solicitations = [...solicitations, solicitation];
+    res.status(201).json(solicitation);
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
 });
 
 app.get("/pizzas", (req, res) => {
