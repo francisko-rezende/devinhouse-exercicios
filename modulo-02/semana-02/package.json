@@ -1,0 +1,12 @@
+{
+  "name": "ex-m02-s02",
+  "version": "1.0.0",
+  "description": "Exercicios da semana 02 do módulo 02 - DevInHouse",
+  "main": "index.js",
+  "repository": "https://github.com/francisko-rezende/devinhouse-exercicios",
+  "author": "Francisko de Moraes Rezende",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
