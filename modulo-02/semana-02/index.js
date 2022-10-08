@@ -28,6 +28,23 @@ const solicitationSchema = yup.object({
   orders: yup.array().of(pizzaSchema),
 });
 
+app.get("/solicitations/:id", (req, res) => {
+  const { id } = req.params;
+
+  if (!!id) {
+    const getSolicitationWithMatchingId = (solicitation) =>
+      solicitation.id === id;
+    const searchedSolicitation = solicitations.find(
+      getSolicitationWithMatchingId
+    );
+    return searchedSolicitation
+      ? res.status(200).json(searchedSolicitation)
+      : res.status(400).json({ error: "Pedido não encontrado" });
+  }
+
+  return res.status(400).json({ error: "Pedido não encontrado" });
+});
+
 app.get("/solicitations", (req, res) => {
   res.status(200).json(solicitations);
 });
