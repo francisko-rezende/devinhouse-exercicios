@@ -1,0 +1,204 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2022-10-08T14:41:38.995Z",
+  "__export_source": "insomnia.desktop.app:v2022.4.2",
+  "resources": [
+    {
+      "_id": "req_2f73edd64a11483e8fadeb9d8603b5b0",
+      "parentId": "wrk_24c9ffdf561b4b1cbac372ef67df715a",
+      "modified": 1665239775305,
+      "created": 1665231920195,
+      "url": "http://localhost:3333/pizzas",
+      "name": "Cria nova pizza",
+      "description": "Rota utilizada para criar uma entrada no banco de pizzas.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Peperoni\",\n  \"description\": \"Deliciosa pizza de Muçarela\",\n  \"price\": 123,\n  \"ingredients\": [\"queijo\", \"tomate\", \"cebola\"]\n}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_9c301d23e99b4504a61f8595db2b6e21"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1665231920195,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_24c9ffdf561b4b1cbac372ef67df715a",
+      "parentId": null,
+      "modified": 1665231696720,
+      "created": 1665231696720,
+      "name": "m02-s02",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_86089707d1514139bae3c0116b36a0fe",
+      "parentId": "wrk_24c9ffdf561b4b1cbac372ef67df715a",
+      "modified": 1665239876498,
+      "created": 1665238175247,
+      "url": "http://localhost:3333/solicitations",
+      "name": "Cria novo pedido",
+      "description": "Rota utilizada pra criar um novo pedido. Contém as informações do cliente e das pizzas que ele selecionou.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"client\": \"João Cunha\",\n  \"document\": \"327.129.163-28\",\n  \"address\": \"Rua dos bobos número 0\",\n  \"phoneNumber\": \"(32) 98888-8888\",\n  \"paymentMethod\": \"pix\",\n  \"notes\": \"sem cebola\",\n  \"orders\": []\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_9c301d23e99b4504a61f8595db2b6e21"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1665231809766,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_86f0c11800a24c628f1769adae743806",
+      "parentId": "wrk_24c9ffdf561b4b1cbac372ef67df715a",
+      "modified": 1665239930324,
+      "created": 1665231699337,
+      "url": "http://localhost:3333/pizzas",
+      "name": "Busca pizzas ou pizza por nome",
+      "description": "Busca pizzas disponíveis e aceita o nome da pizza para buscas específicas como um query parameter.",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_3ae440f1a5a1465a8116cc6f7076e6b1",
+          "name": "name",
+          "value": "muçarela",
+          "description": ""
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1665231699337,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_4805603bf26c43fcad00168a3f938694",
+      "parentId": "wrk_24c9ffdf561b4b1cbac372ef67df715a",
+      "modified": 1665239948134,
+      "created": 1665238705187,
+      "url": "http://localhost:3333/solicitations",
+      "name": "Busca pedidos",
+      "description": "Rota utilizada para criar pedidos.",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_3ae440f1a5a1465a8116cc6f7076e6b1",
+          "name": "name",
+          "value": "muçarela",
+          "description": ""
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1665207883428,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_68cf3ffb0f7446378827b8cea393ee47",
+      "parentId": "wrk_24c9ffdf561b4b1cbac372ef67df715a",
+      "modified": 1665240003711,
+      "created": 1665238981403,
+      "url": "http://localhost:3333/solicitations/591d8ab3-45d2-4379-adef-f49381144f4",
+      "name": "Busca pedido por id",
+      "description": "Rota criada para buscar um pedido específico, busca utilizando o id do pedido.",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_3ae440f1a5a1465a8116cc6f7076e6b1",
+          "name": "name",
+          "value": "muçarela",
+          "description": ""
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1665195975473.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_fd1e45179b982ece4ae9f0dd3ca5aa84f54ae342",
+      "parentId": "wrk_24c9ffdf561b4b1cbac372ef67df715a",
+      "modified": 1665231696727,
+      "created": 1665231696727,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1665231696727,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_fd1e45179b982ece4ae9f0dd3ca5aa84f54ae342",
+      "parentId": "wrk_24c9ffdf561b4b1cbac372ef67df715a",
+      "modified": 1665231696728,
+      "created": 1665231696728,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_5de93884225e43e3919a89a90ded6285",
+      "parentId": "wrk_24c9ffdf561b4b1cbac372ef67df715a",
+      "modified": 1665231696724,
+      "created": 1665231696724,
+      "fileName": "m02-s02",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    }
+  ]
+}
