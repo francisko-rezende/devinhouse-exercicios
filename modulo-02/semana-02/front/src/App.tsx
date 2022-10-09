@@ -1,5 +1,6 @@
 import { Header } from './components/Header';
 import { Icon } from './components/Icon';
+import { Main } from './components/Main';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           Pizzaria divina pizza
         </h1>
       </Header>
-      <main>body</main>
+      <Main></Main>
       <footer style={{ marginTop: 'auto' }}>footer</footer>
     </div>
   );
