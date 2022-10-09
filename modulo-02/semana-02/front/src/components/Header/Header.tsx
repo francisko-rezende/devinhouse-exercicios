@@ -19,6 +19,7 @@ export const Header = ({ children }: HeaderProps) => {
 const StyledHeader = styled.header`
   background-color: ${tomato.tomato3};
   color: ${tomato.tomato12};
+  text-align: center;
 `;
 
 // const Cluster = styled.div`

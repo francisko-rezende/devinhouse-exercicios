@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-
-import { Center } from './components/Center';
 import { Header } from './components/Header';
+import { Icon } from './components/Icon';
 
 function App() {
   return (
@@ -13,7 +11,10 @@ function App() {
       }}
     >
       <Header>
-        <h1>Pizzaria divina pizza</h1>
+        <h1 style={{ display: 'flex', gap: '1rem' }}>
+          <Icon />
+          Pizzaria divina pizza
+        </h1>
       </Header>
       <main>body</main>
       <footer style={{ marginTop: 'auto' }}>footer</footer>
