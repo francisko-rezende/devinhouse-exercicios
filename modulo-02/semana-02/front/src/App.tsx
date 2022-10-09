@@ -17,7 +17,7 @@ function App() {
           Pizzaria divina pizza
         </h1>
       </Header>
-      <Main></Main>
+      <Main />
       <footer style={{ marginTop: 'auto' }}>footer</footer>
     </div>
   );

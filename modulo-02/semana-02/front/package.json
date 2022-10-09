@@ -12,9 +12,11 @@
   },
   "dependencies": {
     "@radix-ui/colors": "^0.1.8",
+    "axios": "^1.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.37.0",
+    "react-query": "^3.39.2",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
