@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Center } from './components/Center';
+import { Header } from './components/Header';
 
 function App() {
   return (
@@ -11,9 +12,9 @@ function App() {
         height: '100%',
       }}
     >
-      <header style={{ marginBottom: 'auto' }}>
+      <Header>
         <h1>Pizzaria divina pizza</h1>
-      </header>
+      </Header>
       <main>body</main>
       <footer style={{ marginTop: 'auto' }}>footer</footer>
     </div>
