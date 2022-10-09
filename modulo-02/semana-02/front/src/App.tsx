@@ -9,11 +9,10 @@ function App() {
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
-        justifyContent: 'center',
       }}
     >
       <Header>
-        <h1 style={{ display: 'flex', gap: '1rem' }}>
+        <h1 style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
           <Icon />
           Pizzaria divina pizza
         </h1>
