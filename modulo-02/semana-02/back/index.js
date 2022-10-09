@@ -1,9 +1,11 @@
 const express = require("express");
 const yup = require("yup");
 const { v4: uuidv4 } = require("uuid");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 let pizzas = [
   {
