@@ -11,7 +11,7 @@ export const Center = ({ children }: CenterProps) => {
 
 const StyledCenter = styled.div`
   box-sizing: content-box;
-  max-inline-size: 60ch;
+  max-inline-size: 1200px;
   margin-inline: auto;
   padding-inline-start: 8px;
   padding-inline-end: 8px;
