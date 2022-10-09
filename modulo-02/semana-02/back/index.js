@@ -5,7 +5,29 @@ const { v4: uuidv4 } = require("uuid");
 const app = express();
 app.use(express.json());
 
-let pizzas = [];
+let pizzas = [
+  {
+    id: "0dcee223-2faa-485e-b046-3d3993154549",
+    name: "Peperoni",
+    description: "Deliciosa pizza de Peperoni",
+    price: 123,
+    ingredients: ["peperoni", "tomate", "cebola"],
+  },
+  {
+    id: "894f3130-db65-4947-8ac5-97a63ad89b8d",
+    name: "Muçarela",
+    description: "Deliciosa pizza de Muçarela",
+    price: 123,
+    ingredients: ["queijo", "tomate", "cebola"],
+  },
+  {
+    id: "836f545f-d031-4193-8d8b-d045e509309d",
+    name: "Brigadeiro",
+    description: "Deliciosa pizza de Brigadeiro",
+    price: 123,
+    ingredients: ["brigadeiro"],
+  },
+];
 let solicitations = [];
 
 const pizzaSchema = yup.object({
