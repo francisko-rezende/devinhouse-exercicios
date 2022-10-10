@@ -55,6 +55,7 @@ const ContentWrapper = styled.div`
 type WrapperProps = Pick<PizzaCardProps, 'isSelected'>;
 
 const Wrapper = styled.li<WrapperProps>`
+  cursor: pointer;
   border-radius: 10px;
   overflow: hidden;
   display: grid;
