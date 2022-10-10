@@ -83,7 +83,7 @@ app.post("/solicitations", async (req, res) => {
 
     await solicitationSchema.validate(body);
 
-    const solicitation = { id: uuidv4(), ...body, order: pizzas };
+    const solicitation = { id: uuidv4(), ...body };
     solicitations = [...solicitations, solicitation];
     res.status(201).json(solicitation);
   } catch (error) {
