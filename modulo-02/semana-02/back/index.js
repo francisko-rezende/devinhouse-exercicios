@@ -53,7 +53,7 @@ const solicitationSchema = yup.object({
   phoneNumber: yup.string().required("Número de telefone é obrigatório"),
   paymentMethod: yup.string().required("Método de pagamento é obrigatório"),
   notes: yup.string(),
-  orders: yup.array().of(pizzaSchema),
+  order: yup.array().of(pizzaSchema),
 });
 
 app.get("/solicitations/:id", (req, res) => {
@@ -83,7 +83,7 @@ app.post("/solicitations", async (req, res) => {
 
     await solicitationSchema.validate(body);
 
-    const solicitation = { id: uuidv4(), ...body, orders: pizzas };
+    const solicitation = { id: uuidv4(), ...body, order: pizzas };
     solicitations = [...solicitations, solicitation];
     res.status(201).json(solicitation);
   } catch (error) {
