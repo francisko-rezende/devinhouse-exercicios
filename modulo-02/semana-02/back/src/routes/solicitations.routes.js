@@ -3,7 +3,7 @@ import {
   getSolicitationById,
   getSolicitations,
   postSolicitation,
-} from "../controllers/solicitation.controller";
+} from "../controllers/solicitation.controller.js";
 
 const solicitationRoutes = Router();
 

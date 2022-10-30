@@ -1,7 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
+import fs from "fs";
+import { response } from "express";
+import { pizzaSchema } from "../validations/pizza.schema.js";
+import { getPizzasInFile } from "../utils/getPizzasInFile.js";
 
 export const findManyPizzas = (req, res) => {
   const { name } = req.query;
+
+  const pizzas = getPizzasInFile();
 
   if (!!name) {
     const searchedNameMatchesPizzaName = (pizza) =>
@@ -20,13 +26,23 @@ export const createPizza = async (req, res) => {
 
     await pizzaSchema.validate(body);
 
-    const pizza = {
+    const pizzas = getPizzasInFile();
+
+    const newPizza = {
       id: uuidv4(),
       ...body,
     };
 
-    pizzas = [...pizzas, pizza];
-    return res.status(201).json(pizza);
+    const pizzaExists = pizzas.find((pizza) => pizza.name === newPizza.name);
+
+    if (pizzaExists) {
+      return res
+        .status(401)
+        .json({ error: "Pizza already exists in the database" });
+    }
+
+    fs.writeFileSync("pizzas.json", JSON.stringify([...pizzas, newPizza]));
+    return res.status(201).json(newPizza);
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }
@@ -36,10 +52,14 @@ export const updatePizza = async (req, res) => {
   try {
     const updatedPizza = { ...req.body };
     await pizzaSchema.validate(updatedPizza);
-    pizzas = pizzas.map((pizza) => {
+
+    const pizzas = getPizzasInFile();
+
+    const updatedPizzas = pizzas.map((pizza) => {
       const isPizzaToUpdate = pizza.id === updatedPizza.id;
       return isPizzaToUpdate ? updatedPizza : pizza;
     });
+    fs.writeFileSync("pizzas.json", JSON.stringify(updatedPizzas));
     return res.status(200).send("Pizza editada com sucesso");
   } catch (error) {
     return res.status(400).json({ error: error.message });
@@ -48,6 +68,9 @@ export const updatePizza = async (req, res) => {
 
 export const deletePizza = (req, res) => {
   const { id } = req.params;
-  pizzas = pizzas.filter((pizza) => pizza.id !== id);
+  const pizzas = getPizzasInFile();
+
+  const updatedPizzas = pizzas.filter((pizza) => pizza.id !== id);
+  fs.writeFileSync("pizzas.json", JSON.stringify(updatedPizzas));
   return res.status(200).send("Pizza deletada");
 };
