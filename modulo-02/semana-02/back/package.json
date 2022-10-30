@@ -6,6 +6,7 @@
   "repository": "https://github.com/francisko-rezende/devinhouse-exercicios",
   "author": "Francisko de Moraes Rezende",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "server": "nodemon index.js"
   },
