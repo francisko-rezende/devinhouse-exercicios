@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { pizzaSchema } from "./pizza.schema";
+import { pizzaSchema } from "./pizza.schema.js";
 
 export const solicitationSchema = yup.object({
   client: yup.string().required("Nome do cliente é obrigatório"),
