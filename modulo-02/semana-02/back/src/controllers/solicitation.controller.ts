@@ -1,16 +1,18 @@
 import { v4 as uuidv4 } from "uuid";
 import { getSolicitationsInFile } from "../utils/getSolicitationsInFile.js";
 import fs from "fs";
+import { Request, Response } from "express";
 import { solicitationSchema } from "../validations/solicitation.schema.js";
+import { Solicitation } from "../types/solicitation.type";
 
-export const getSolicitationById = (req, res) => {
+export const getSolicitationById = (req: Request, res: Response) => {
   const { id } = req.params;
 
   if (!!id) {
-    const getSolicitationWithMatchingId = (solicitation) =>
+    const getSolicitationWithMatchingId = (solicitation: Solicitation) =>
       solicitation.id === id;
 
-    const solicitations = getSolicitationsInFile();
+    const solicitations: Solicitation[] = getSolicitationsInFile();
 
     const searchedSolicitation = solicitations.find(
       getSolicitationWithMatchingId
@@ -23,13 +25,13 @@ export const getSolicitationById = (req, res) => {
   return res.status(400).json({ error: "Pedido não encontrado" });
 };
 
-export const getSolicitations = (req, res) => {
+export const getSolicitations = (req: Request, res: Response) => {
   const solicitations = getSolicitationsInFile();
 
   res.status(200).json(solicitations);
 };
 
-export const postSolicitation = async (req, res) => {
+export const postSolicitation = async (req: Request, res: Response) => {
   try {
     const { body } = req;
 
@@ -46,11 +48,11 @@ export const postSolicitation = async (req, res) => {
     );
     res.status(201).json(solicitation);
   } catch (error) {
-    return res.status(400).json({ error: error.message });
+    return res.status(400).json({ error: "Ocorreu um erro." });
   }
 };
 
-export const updateStatus = (req, res) => {
+export const updateStatus = (req: Request, res: Response) => {
   const { id } = req.params;
 
   if (!!id) {
