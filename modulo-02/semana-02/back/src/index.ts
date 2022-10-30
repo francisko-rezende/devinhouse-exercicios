@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import { pizzaRoutes } from "./src/routes/pizzas.routes.js";
-import { solicitationRoutes } from "./src/routes/solicitations.routes.js";
+import { pizzaRoutes } from "./routes/pizzas.routes.js";
+import { solicitationRoutes } from "./routes/solicitations.routes.js";
 
 const app = express();
 app.use(express.json());

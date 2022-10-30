@@ -3,6 +3,7 @@ import * as yup from "yup";
 export const pizzaSchema = yup.object({
   id: yup.string(),
   name: yup.string().required("Nome é obrigatório"),
+  url: yup.string().url(),
   description: yup.string().required("Descrição é obrigatória"),
   price: yup.number().required("Preço é obrigatório"),
   ingredients: yup

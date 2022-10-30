@@ -5,7 +5,7 @@ import {
   deletePizza,
   findManyPizzas,
   updatePizza,
-} from "../controllers/pizza.controller.js";
+} from "../controllers/pizza.controller";
 
 const pizzaRoutes = Router();
 
