@@ -5,6 +5,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
   Query,
 } from '@nestjs/common';
 import { NestResponse } from 'src/core/http/nestResponse';
@@ -36,5 +37,15 @@ export class BeerController {
   public getBeer(@Param('beerName') beerName: string) {
     const beer = this.service.getBeer(beerName);
     return beer;
+  }
+
+  @Put(':beerName')
+  public updateBeer(
+    @Param('beerName') beerName: string,
+    @Body() beerInfo: Beer,
+  ) {
+    const updatedBeer = beerInfo;
+    this.service.updateBeer(beerName, beerInfo);
+    return updatedBeer;
   }
 }

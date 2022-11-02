@@ -55,4 +55,27 @@ export class BeerService {
 
     return searchedBeer;
   }
+
+  updateBeer(beerName: string, beerInfo: Beer) {
+    const beers = this.database.getBeers();
+    const checkIfMatchingBeerName = ({ name }) =>
+      name.trim().toLowerCase() === beerName.trim().toLowerCase();
+
+    const isBeerToUpdateInDatabase = beers.some(checkIfMatchingBeerName);
+
+    if (!isBeerToUpdateInDatabase) {
+      throw new NotFoundException({
+        error: 404,
+        message: 'Beer not found',
+      });
+    }
+
+    const updatedBeers = beers.map((beer) => {
+      const isBeerToUpdate = checkIfMatchingBeerName({ name: beer.name });
+
+      return isBeerToUpdate ? beerInfo : beer;
+    });
+
+    this.database.saveBeers(updatedBeers);
+  }
 }
