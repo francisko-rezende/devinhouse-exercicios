@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
   Param,
@@ -47,5 +48,11 @@ export class BeerController {
     const updatedBeer = beerInfo;
     this.service.updateBeer(beerName, beerInfo);
     return updatedBeer;
+  }
+
+  @Delete(':beerName')
+  public deleteBeer(@Param('beerName') beerName: string) {
+    const beerToDelete = beerName;
+    this.service.deleteBeer(beerToDelete);
   }
 }
