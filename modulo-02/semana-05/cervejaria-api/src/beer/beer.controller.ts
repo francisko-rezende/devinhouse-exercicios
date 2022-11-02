@@ -1,4 +1,12 @@
-import { Body, Controller, Get, HttpStatus, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { NestResponse } from 'src/core/http/nestResponse';
 import { NestResponseBuilder } from 'src/core/http/nestResponseBuilder';
 import { Beer } from './beer.entity';
@@ -22,5 +30,11 @@ export class BeerController {
       .withHeaders({ Location: `beers/${newBeer.name}` })
       .withBody(newBeer)
       .build();
+  }
+
+  @Get(':beerName')
+  public getBeer(@Param('beerName') beerName: string) {
+    const beer = this.service.getBeer(beerName);
+    return beer;
   }
 }

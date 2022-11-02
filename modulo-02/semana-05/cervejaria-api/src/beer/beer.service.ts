@@ -1,5 +1,5 @@
 import { Database } from './../database/database';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Beer } from './beer.entity';
 import { GetBeersResult } from 'src/types/GetBeersResult';
 
@@ -37,5 +37,22 @@ export class BeerService {
     }
 
     return result;
+  }
+
+  getBeer(searchedName: string) {
+    const beers = this.database.getBeers();
+    const checkIfMatchingBeerName = ({ name }) =>
+      name.trim().toLowerCase() === searchedName.trim().toLowerCase();
+
+    const searchedBeer = beers.find(checkIfMatchingBeerName);
+
+    if (!searchedBeer) {
+      throw new NotFoundException({
+        error: 404,
+        message: 'Beer not found',
+      });
+    }
+
+    return searchedBeer;
   }
 }
