@@ -1,5 +1,8 @@
-import fs from 'fs';
+import { Injectable } from '@nestjs/common';
+import * as fs from 'fs';
 import { Beer } from 'src/beer/beer.entity';
+
+@Injectable()
 export class Database {
   private FILENAME = 'beers.json';
 
