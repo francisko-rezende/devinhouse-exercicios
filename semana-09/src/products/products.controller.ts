@@ -30,8 +30,15 @@ export class ProductsController {
   }
 
   @Get()
-  findAll() {
-    return this.productsService.findAll();
+  async findAll() {
+    try {
+      return await this.productsService.findAll();
+    } catch (error) {
+      throw new HttpException(
+        { code: error.code, details: error.details },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 
   @Get(':id')

@@ -31,8 +31,15 @@ export class ProductsService {
     });
   }
 
-  findAll() {
-    return `This action returns all products`;
+  async findAll(): Promise<Product[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const products = await this.productRepository.find();
+        resolve(products);
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   findOne(id: number) {
