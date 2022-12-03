@@ -8,10 +8,12 @@ import {
   Delete,
   HttpException,
   HttpStatus,
+  Res,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { Response } from 'express';
 
 @Controller('products')
 export class ProductsController {
@@ -42,8 +44,24 @@ export class ProductsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.productsService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() response: Response) {
+    try {
+      const searchedProduct = await this.productsService.findOne(+id);
+      if (searchedProduct) {
+        response.status(HttpStatus.OK).send(searchedProduct);
+        return searchedProduct;
+      }
+      response
+        .status(HttpStatus.NOT_FOUND)
+        .send(`There is no registered user with the id ${id}`);
+      return searchedProduct;
+    } catch (error) {
+      console.log(error);
+      throw new HttpException(
+        { code: error.code, details: error.details },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 
   @Patch(':id')

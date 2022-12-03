@@ -42,8 +42,19 @@ export class ProductsService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: number): Promise<Product> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const searchedProduct = await this.productRepository.findOne({
+          where: {
+            id: id,
+          },
+        });
+        resolve(searchedProduct);
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
