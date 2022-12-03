@@ -1,3 +1,4 @@
+import { CategoryQueryDto } from './dto/category-query.dto';
 import {
   Controller,
   Get,
@@ -9,11 +10,13 @@ import {
   HttpException,
   HttpStatus,
   Res,
+  Query,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Response } from 'express';
+import { ProductCategories } from './utils/product-categories.enum';
 
 @Controller('products')
 export class ProductsController {
@@ -32,9 +35,10 @@ export class ProductsController {
   }
 
   @Get()
-  async findAll() {
+  async findAll(@Query() query: CategoryQueryDto) {
+    const { category } = query;
     try {
-      return await this.productsService.findAll();
+      return await this.productsService.findAll(category);
     } catch (error) {
       throw new HttpException(
         { code: error.code, details: error.details },

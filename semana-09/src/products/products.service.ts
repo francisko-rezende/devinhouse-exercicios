@@ -31,9 +31,19 @@ export class ProductsService {
     });
   }
 
-  async findAll(): Promise<Product[]> {
+  async findAll(query?: ProductCategories): Promise<Product[]> {
     return new Promise(async (resolve, reject) => {
       try {
+        if (query) {
+          console.log(query);
+          const products = await this.productRepository.find({
+            where: {
+              category: parseInt(ProductCategories[query]),
+            },
+          });
+          resolve(products);
+        }
+
         const products = await this.productRepository.find();
         resolve(products);
       } catch (error) {
