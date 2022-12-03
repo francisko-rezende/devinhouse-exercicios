@@ -60,6 +60,28 @@ export class ShoppingCartsService {
     });
   }
 
+  removeProductFromCart(id: number) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const shoppingCart = await this.shoppingCartRepository.findOne({
+          where: {
+            user: 1,
+          },
+          relations: {
+            products: true,
+          },
+        });
+
+        shoppingCart.removeProduct(id);
+
+        await this.shoppingCartRepository.save(shoppingCart);
+        resolve(true);
+      } catch (error) {
+        reject({ code: error.code, detail: error.detail });
+      }
+    });
+  }
+
   findAll() {
     return `This action returns all shoppingCarts`;
   }

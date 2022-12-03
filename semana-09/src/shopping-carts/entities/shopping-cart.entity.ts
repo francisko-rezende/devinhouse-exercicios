@@ -14,14 +14,15 @@ export class ShoppingCart {
   products: Product[];
 
   addProduct(productId: Product) {
-    console.log(productId);
     if (this.products === null) {
       this.products = new Array<Product>();
     }
     this.products.push(productId);
   }
-}
 
-// class AddProductToCartDto {
-//   id: number;
-// }
+  removeProduct(productId) {
+    if (productId !== null) {
+      this.products = this.products.filter(({ id }) => id != productId);
+    }
+  }
+}

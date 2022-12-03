@@ -31,6 +31,11 @@ export class ShoppingCartsController {
     return await this.shoppingCartsService.findAllProductsInTheCart();
   }
 
+  @Delete(':id')
+  async removeProductFromCart(@Param('id') productId: number) {
+    return this.shoppingCartsService.removeProductFromCart(productId);
+  }
+
   @Get()
   findAll() {
     return this.shoppingCartsService.findAll();

@@ -60,7 +60,6 @@ export class ProductsController {
         .send(`There is no registered user with the id ${id}`);
       return searchedProduct;
     } catch (error) {
-      console.log(error);
       throw new HttpException(
         { code: error.code, details: error.details },
         HttpStatus.BAD_REQUEST,

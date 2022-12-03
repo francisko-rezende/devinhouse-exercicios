@@ -35,7 +35,6 @@ export class ProductsService {
     return new Promise(async (resolve, reject) => {
       try {
         if (query) {
-          console.log(query);
           const products = await this.productRepository.find({
             where: {
               category: parseInt(ProductCategories[query]),
