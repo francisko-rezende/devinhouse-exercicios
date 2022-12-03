@@ -1,3 +1,4 @@
+import { ShoppingCart } from 'src/shopping-carts/entities/shopping-cart.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ProductCategories } from '../utils/product-categories.enum';
 
@@ -20,4 +21,9 @@ export class Product {
 
   @Column('bool')
   isActive: boolean;
+
+  // @ManyToOne(() => ShoppingCart, (shoppingCart) => shoppingCart.products, {
+  //   onDelete: 'SET NULL',
+  // })
+  shoppingCart?: ShoppingCart;
 }
