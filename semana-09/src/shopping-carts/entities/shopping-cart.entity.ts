@@ -13,10 +13,15 @@ export class ShoppingCart {
   @JoinTable({ name: 'shoppingCart_products' })
   products: Product[];
 
-  addProduct(product: Product) {
+  addProduct(productId: Product) {
+    console.log(productId);
     if (this.products === null) {
       this.products = new Array<Product>();
     }
-    this.products.push(product);
+    this.products.push(productId);
   }
 }
+
+// class AddProductToCartDto {
+//   id: number;
+// }
