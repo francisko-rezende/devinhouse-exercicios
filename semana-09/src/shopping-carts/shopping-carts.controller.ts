@@ -6,11 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { ShoppingCartsService } from './shopping-carts.service';
 import { CreateShoppingCartDto } from './dto/create-shopping-cart.dto';
 import { UpdateShoppingCartDto } from './dto/update-shopping-cart.dto';
 import { Product } from 'src/products/entities/product.entity';
+import { CompletePurchaseDto } from './dto/complete-purchase.dto';
 
 @Controller('shopping-carts')
 export class ShoppingCartsController {
@@ -36,26 +39,18 @@ export class ShoppingCartsController {
     return this.shoppingCartsService.removeProductFromCart(productId);
   }
 
-  @Get()
-  findAll() {
-    return this.shoppingCartsService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.shoppingCartsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateShoppingCartDto: UpdateShoppingCartDto,
-  ) {
-    return this.shoppingCartsService.update(+id, updateShoppingCartDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.shoppingCartsService.remove(+id);
+  @Post('complete-purchase')
+  async completePurchase(@Body() completePurchaseDto: CompletePurchaseDto) {
+    try {
+      return await this.shoppingCartsService.completePurchase(
+        completePurchaseDto,
+      );
+    } catch (error) {
+      if (error.reason == 'Invalid payment info')
+        throw new HttpException(
+          { detail: error.reason },
+          HttpStatus.BAD_REQUEST,
+        );
+    }
   }
 }

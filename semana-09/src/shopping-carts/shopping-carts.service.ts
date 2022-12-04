@@ -1,8 +1,10 @@
+import { CompletePurchaseDto } from './dto/complete-purchase.dto';
 import { ShoppingCart } from 'src/shopping-carts/entities/shopping-cart.entity';
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { UpdateShoppingCartDto } from './dto/update-shopping-cart.dto';
 import { Product } from 'src/products/entities/product.entity';
+import { isBefore } from 'date-fns';
 
 @Injectable()
 export class ShoppingCartsService {
@@ -36,6 +38,7 @@ export class ShoppingCartsService {
         cartToAddProduct.addProduct(product);
 
         await this.shoppingCartRepository.save(cartToAddProduct);
+        await this.updateCartTotal();
         resolve(true);
       } catch (error) {
         reject({ code: error.code, detail: error.detail });
@@ -82,19 +85,42 @@ export class ShoppingCartsService {
     });
   }
 
-  findAll() {
-    return `This action returns all shoppingCarts`;
+  completePurchase(completePurchaseDto: CompletePurchaseDto) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        if (
+          completePurchaseDto.paymentInfo.cardNumber != '4444 4444 4444 4444' ||
+          completePurchaseDto.paymentInfo.cardSecurityCode !== '222' ||
+          new Date().getTime() >
+            new Date(
+              completePurchaseDto.paymentInfo.cardExpirationDate,
+            ).getTime()
+        ) {
+          reject({ reason: 'Invalid payment info' });
+        }
+        const cart = await this.shoppingCartRepository.findOne({
+          where: { user: 1 },
+          relations: { products: true },
+        });
+        const total = cart.products.reduce((acc, { price }) => price + acc, 0);
+        cart.clearCart();
+        await this.shoppingCartRepository.save(cart);
+        resolve({ ...completePurchaseDto, total });
+      } catch (error) {
+        reject({ code: error.code, detail: error.detail });
+      }
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} shoppingCart`;
-  }
+  async updateCartTotal() {
+    const cart = await this.shoppingCartRepository.findOne({
+      where: { user: 1 },
+      relations: {
+        products: true,
+      },
+    });
 
-  update(id: number, updateShoppingCartDto: UpdateShoppingCartDto) {
-    return `This action updates a #${id} shoppingCart`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} shoppingCart`;
+    const newTotal = cart.products.reduce((acc, { price }) => acc + price, 0);
+    await this.shoppingCartRepository.save({ ...cart, total: newTotal });
   }
 }

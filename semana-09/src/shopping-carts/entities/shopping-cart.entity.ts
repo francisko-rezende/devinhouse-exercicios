@@ -25,4 +25,8 @@ export class ShoppingCart {
       this.products = this.products.filter(({ id }) => id != productId);
     }
   }
+
+  clearCart() {
+    this.products = [];
+  }
 }
