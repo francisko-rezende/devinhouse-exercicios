@@ -12,6 +12,17 @@ export class TweetsService {
     @Inject('USERS_REPOSITORY') private usersRepository: Repository<User>,
   ) {}
 
+  getFormattedTweetData = ({
+    text,
+    createdAt,
+    user: { name, user },
+  }): FeedTweetDto => ({
+    name,
+    user,
+    text,
+    createdAt,
+  });
+
   create(createTweetDto: CreateTweetDto) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -47,21 +58,26 @@ export class TweetsService {
           take: 20,
         });
 
-        const getFormattedFeedTweet = ({
-          text,
-          createdAt,
-          user: { name, user },
-        }): FeedTweetDto => ({
-          name,
-          user,
-          text,
-          createdAt,
-        });
-
-        const feedTweets = tweets.map(getFormattedFeedTweet);
+        const feedTweets = tweets.map(this.getFormattedTweetData);
         resolve(feedTweets);
       } catch (error) {
         reject({ code: error.code, detail: error.detail });
+      }
+    });
+  }
+
+  findUserTweets(userId: number) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const userTweets = await this.tweetsRepository.find({
+          relations: { user: true },
+          where: { user: { userId: userId } },
+          order: { createdAt: 'DESC' },
+        });
+        const formattedTweets = userTweets.map(this.getFormattedTweetData);
+        resolve(formattedTweets);
+      } catch (error) {
+        reject(error);
       }
     });
   }
