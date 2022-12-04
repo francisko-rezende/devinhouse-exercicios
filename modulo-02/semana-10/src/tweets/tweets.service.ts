@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateTweetDto } from './dto/create-tweet.dto';
-import { UpdateTweetDto } from './dto/update-tweet.dto';
+import { FeedTweetDto } from './dto/feed-tweet.dto';
 import { Tweet } from './entities/tweet.entity';
 
 @Injectable()
@@ -38,6 +38,33 @@ export class TweetsService {
     });
   }
 
+  findFeed(): Promise<FeedTweetDto[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const tweets = await this.tweetsRepository.find({
+          relations: { user: true },
+          order: { createdAt: 'DESC' },
+          take: 20,
+        });
+
+        const getFormattedFeedTweet = ({
+          text,
+          createdAt,
+          user: { name, user },
+        }): FeedTweetDto => ({
+          name,
+          user,
+          text,
+          createdAt,
+        });
+
+        const feedTweets = tweets.map(getFormattedFeedTweet);
+        resolve(feedTweets);
+      } catch (error) {
+        reject({ code: error.code, detail: error.detail });
+      }
+    });
+  }
   // findAll() {
   //   return `This action returns all tweets`;
   // }

@@ -26,6 +26,15 @@ export class TweetsController {
     }
   }
 
+  @Get('feed')
+  async findFeed() {
+    try {
+      return await this.tweetsService.findFeed();
+    } catch (error) {
+      throw new HttpException({ detail: error.detail }, HttpStatus.BAD_REQUEST);
+    }
+  }
+
   // @Get()
   // findAll() {
   //   return this.tweetsService.findAll();
