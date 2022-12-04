@@ -18,6 +18,13 @@ export class User {
   @Column()
   photoUrl: string;
 
-  @OneToMany(() => Tweet, (tweets) => tweets.user)
+  @OneToMany(() => Tweet, (tweet) => tweet.user, { cascade: true })
   tweets: Tweet[];
+
+  createTweet(tweetId: Tweet) {
+    if (this.tweets === null) {
+      this.tweets = new Array<Tweet>();
+    }
+    this.tweets.push(tweetId);
+  }
 }

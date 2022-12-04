@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -19,5 +20,6 @@ export class Tweet {
   createdAt: Date;
 
   @ManyToOne(() => User, (user) => user.tweets, { onDelete: 'SET NULL' })
+  @JoinColumn({ name: 'userId' })
   user: User;
 }
