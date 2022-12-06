@@ -37,15 +37,25 @@ export class TweetsController {
     }
   }
 
-  @Get()
+  @Get('user')
   async findUserTweets(@Query() query: UserIdQueryDto) {
     try {
       const { userId } = query;
-      console.log(userId);
       return await this.tweetsService.findUserTweets(+userId);
     } catch (error) {
       throw new HttpException({ detail: error.detail }, HttpStatus.BAD_REQUEST);
     }
+  }
+
+  @Get(':hashtag')
+  async findTweetsByHashtag(@Param() param: { hashtag: string }) {
+    const { hashtag } = param;
+    return await this.tweetsService.findTweetsByHashtag(hashtag);
+  }
+
+  @Post('link-hashtag')
+  async linkHashtagToTweet(@Body() body) {
+    return this.tweetsService.linkHashtagToTweet(body);
   }
 
   // @Get()

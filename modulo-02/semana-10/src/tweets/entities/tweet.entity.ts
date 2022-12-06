@@ -29,4 +29,11 @@ export class Tweet {
   @ManyToMany(() => Hashtag)
   @JoinTable({ name: 'tweets_hashtags' })
   hashtags: Hashtag[];
+
+  // linkHashtagToTweet(hashtagId) {
+  //   if (this.hashtags === null) {
+  //     this.hashtags = new Array<Hashtag>();
+  //   }
+  //   this.hashtags.push(hashtagId);
+  // }
 }

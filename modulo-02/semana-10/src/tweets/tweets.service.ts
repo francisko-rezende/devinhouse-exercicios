@@ -81,6 +81,48 @@ export class TweetsService {
       }
     });
   }
+
+  linkHashtagToTweet(body) {
+    return new Promise(async (resolve) => {
+      const { tweetId, hashtagId } = body;
+
+      const linkedTweet = this.tweetsRepository.create({
+        tweetId: tweetId,
+        hashtags: [{ hashtagId: hashtagId }],
+      });
+
+      this.tweetsRepository.save(linkedTweet);
+      resolve(true);
+    });
+  }
+
+  findTweetsByHashtag(hashtag: string) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const tweets = await this.tweetsRepository.find({
+          relations: {
+            hashtags: true,
+          },
+        });
+
+        const tweetsWithHashtag = this.getTweetsWithHashtags(tweets, hashtag);
+
+        resolve(tweetsWithHashtag);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  getTweetsWithHashtags(tweets: Tweet[], searchedHashtag: string) {
+    const checkIfHasHashTag = ({ hashtag }) =>
+      hashtag === `#${searchedHashtag}`;
+
+    const handleFilteringByHashtag = ({ hashtags }) =>
+      hashtags.some(checkIfHasHashTag);
+
+    return tweets.filter(handleFilteringByHashtag);
+  }
   // findAll() {
   //   return `This action returns all tweets`;
   // }
