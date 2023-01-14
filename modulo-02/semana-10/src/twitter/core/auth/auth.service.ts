@@ -15,7 +15,7 @@ export class AuthService {
 
   // signIn(credentialsDto: CredentialsDto) {}
 
-  createUser(createUserDto: CreateUserDto) {
+  createUser(createUserDto: CreateUserDto): Promise<User> {
     return new Promise(async (resolve, reject) => {
       try {
         const { password } = createUserDto;
@@ -23,7 +23,7 @@ export class AuthService {
         newUser.salt = await bcrypt.genSalt(14);
         newUser.password = await this.hashPassword(password, newUser.salt);
         await this.userRepository.save(newUser);
-        resolve('Usuário criado com sucesso');
+        resolve(newUser);
       } catch (error) {
         reject({ detail: error.detail, code: error.code });
       }

@@ -32,13 +32,25 @@ export class TwitterController {
 
   @Post('user')
   async createUser(@Body() createUserDto: CreateUserDto) {
-    return await this.authService.createUser(createUserDto);
+    try {
+      const { email, password } = await this.authService.createUser(
+        createUserDto,
+      );
+      const credentials: CredentialsDto = { email, password };
+      return await this.signIn(credentials);
+    } catch (error) {
+      return { code: error.code, detail: error.detail };
+    }
   }
 
   @Post('sign-in')
   async signIn(@Body() credentialsDto: CredentialsDto) {
-    const token = await this.authService.signIn(credentialsDto);
-    return { token };
+    try {
+      const token = await this.authService.signIn(credentialsDto);
+      return { token };
+    } catch (error) {
+      return { code: error.code, detail: error.detail };
+    }
   }
 
   // @Get()
