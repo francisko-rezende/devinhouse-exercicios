@@ -22,4 +22,8 @@ export class CreateUserDto {
   @IsOptional()
   @IsUrl()
   readonly photoUrl: string;
+
+  @IsNotEmpty()
+  @IsString()
+  readonly password: string;
 }
