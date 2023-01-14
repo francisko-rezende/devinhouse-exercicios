@@ -1,5 +1,4 @@
-import { Hashtag } from 'src/hashtags/entities/hashtag.entity';
-import { User } from 'src/users/entities/user.entity';
+import { User } from './user.entity';
 import {
   Column,
   CreateDateColumn,
@@ -10,6 +9,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Hashtag } from './hashtag.entity';
 
 @Entity({ name: 'tweets' })
 export class Tweet {
@@ -26,14 +26,14 @@ export class Tweet {
   @JoinColumn({ name: 'userId' })
   user: User;
 
-  @ManyToMany(() => Hashtag)
+  @ManyToMany(() => Hashtag, { cascade: true })
   @JoinTable({ name: 'tweets_hashtags' })
   hashtags: Hashtag[];
 
-  // linkHashtagToTweet(hashtagId) {
-  //   if (this.hashtags === null) {
-  //     this.hashtags = new Array<Hashtag>();
-  //   }
-  //   this.hashtags.push(hashtagId);
-  // }
+  addHashtags(hashtags: Hashtag[]) {
+    if (!this.hashtags) {
+      this.hashtags = new Array<Hashtag>();
+    }
+    this.hashtags.push(...hashtags);
+  }
 }

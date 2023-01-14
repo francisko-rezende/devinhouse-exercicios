@@ -1,6 +1,5 @@
-import { Hashtag } from 'src/hashtags/entities/hashtag.entity';
-
 import { DataSource } from 'typeorm';
+import { Hashtag } from './entities/hashtag.entity';
 
 export const hashtagsProviders = [
   {

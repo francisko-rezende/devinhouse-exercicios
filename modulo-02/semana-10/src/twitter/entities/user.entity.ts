@@ -1,5 +1,5 @@
-import { Tweet } from 'src/tweets/entities/tweet.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Tweet } from './tweet.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -21,7 +21,7 @@ export class User {
   @OneToMany(() => Tweet, (tweet) => tweet.user, { cascade: true })
   tweets: Tweet[];
 
-  createTweet(tweetId: Tweet) {
+  addTweet(tweetId: Tweet) {
     if (this.tweets === null) {
       this.tweets = new Array<Tweet>();
     }
