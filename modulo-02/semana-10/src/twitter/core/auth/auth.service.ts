@@ -5,6 +5,8 @@ import { Repository } from 'typeorm';
 import { CredentialsDto } from './dtos/credentials-dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { JwtPayloadUserDto } from './dtos/jwt-payload-user.dto';
+import { ChangePasswordDto } from './dtos/change-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -55,9 +57,49 @@ export class AuthService {
     });
   }
 
+  changePassword(
+    jwtPayloadUser: JwtPayloadUserDto,
+    changePasswordDto: ChangePasswordDto,
+  ) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { userId } = jwtPayloadUser;
+        const { email, oldPassword } = changePasswordDto;
+
+        const user = await this.checkCredentials({
+          email,
+          password: oldPassword,
+        } as CredentialsDto);
+
+        if (user === null) {
+          reject(null);
+          return;
+        }
+
+        user.password = await this.hashPassword(
+          changePasswordDto.newPassword,
+          user.salt,
+        );
+        await this.userRepository.save(user);
+        resolve('Senha alterada com sucesso');
+      } catch (error) {
+        reject({ detail: error.detail, code: error.code });
+      }
+    });
+  }
+
+  private async checkCredentials(credentialsDto: CredentialsDto) {
+    const { email, password } = credentialsDto;
+    const user = await this.userRepository.findOne({ where: { email: email } });
+
+    if (user && (await user.checkPassword(password))) {
+      return user;
+    }
+
+    return null;
+  }
+
   private hashPassword(password: string, salt: string): Promise<string> {
     return bcrypt.hash(password, salt);
   }
-
-  // validateJwt() {}
 }

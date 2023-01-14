@@ -7,8 +7,10 @@ import {
   UseGuards,
   Get,
   Request,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from 'src/twitter/core/auth/auth.service';
+import { ChangePasswordDto } from './core/auth/dtos/change-password.dto';
 import { CredentialsDto } from './core/auth/dtos/credentials-dto';
 import { JwtAuthGuard } from './core/auth/guards/jwt-auth-guard';
 import { CreateTweetDto } from './dto/create-tweet.dto';
@@ -62,6 +64,22 @@ export class TwitterController {
   @Get('/auth/me')
   async me(@Request() req) {
     return req.user;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('/auth/trocar-senha')
+  async changePassword(
+    @Request() req,
+    @Body() changePasswordDto: ChangePasswordDto,
+  ) {
+    try {
+      await this.authService.changePassword(req.user, changePasswordDto);
+    } catch (error) {
+      if (!error) {
+        throw new UnauthorizedException('E-mail e/ou senha incorretos');
+      }
+      return { code: error.code, detail: error.detail };
+    }
   }
 
   // @Get()
