@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { CreateTweetDto } from './dto/create-tweet.dto';
 import { Tweet } from './entities/tweet.entity';
 import { User } from './entities/user.entity';
-import { JwtPayloadUserDto } from './core/auth/dtos/jwt-payload-user.dto';
 
 @Injectable()
 export class TwitterService {
@@ -15,10 +14,7 @@ export class TwitterService {
     private hashtagsRepository: Repository<Hashtag>,
   ) {}
 
-  createTweet(
-    createTweetDto: CreateTweetDto,
-    jwtPayloadUser: JwtPayloadUserDto,
-  ) {
+  createTweet(createTweetDto: CreateTweetDto) {
     return new Promise(async (resolve, reject) => {
       try {
         const newTweet = this.tweetsRepository.create(createTweetDto);
@@ -26,7 +22,7 @@ export class TwitterService {
         // console.log(hashtags);
         newTweet.addHashtags(hashtags);
 
-        const { userId } = jwtPayloadUser;
+        const { userId } = createTweetDto;
         const user: User = await this.usersRepository.findOne({
           where: {
             userId: userId,
