@@ -26,9 +26,9 @@ export class TwitterController {
 
   @UseGuards(JwtAuthGuard)
   @Post('tweet')
-  async createTweet(@Body() createTweetDto: CreateTweetDto) {
+  async createTweet(@Body() createTweetDto: CreateTweetDto, @Request() req) {
     try {
-      return await this.twitterService.createTweet(createTweetDto);
+      return await this.twitterService.createTweet(createTweetDto, req.user);
     } catch (error) {
       throw new HttpException(
         { code: error.code, detail: error.detail },
