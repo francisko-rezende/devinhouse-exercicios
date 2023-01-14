@@ -1,3 +1,4 @@
+import { JwtStrategy } from './core/auth/guards/jwt-strategy';
 import { databaseProviders } from 'src/twitter/core/database/database.providers';
 import { Module } from '@nestjs/common';
 import { TwitterService } from './twitter.service';
@@ -13,12 +14,13 @@ import { AuthService } from 'src/twitter/core/auth/auth.service';
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: {
-        expiresIn: 60,
+        expiresIn: '6h',
       },
     }),
   ],
   controllers: [TwitterController],
   providers: [
+    JwtStrategy,
     AuthService,
     TwitterService,
     ...databaseProviders,

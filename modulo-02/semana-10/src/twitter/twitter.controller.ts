@@ -4,9 +4,13 @@ import {
   Body,
   HttpException,
   HttpStatus,
+  UseGuards,
+  Get,
+  Request,
 } from '@nestjs/common';
 import { AuthService } from 'src/twitter/core/auth/auth.service';
 import { CredentialsDto } from './core/auth/dtos/credentials-dto';
+import { JwtAuthGuard } from './core/auth/guards/jwt-auth-guard';
 import { CreateTweetDto } from './dto/create-tweet.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { TwitterService } from './twitter.service';
@@ -18,6 +22,7 @@ export class TwitterController {
     private readonly authService: AuthService,
   ) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post('tweet')
   async createTweet(@Body() createTweetDto: CreateTweetDto) {
     try {
@@ -51,6 +56,12 @@ export class TwitterController {
     } catch (error) {
       return { code: error.code, detail: error.detail };
     }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/auth/me')
+  async me(@Request() req) {
+    return req.user;
   }
 
   // @Get()
