@@ -81,24 +81,4 @@ export class TwitterController {
       return { code: error.code, detail: error.detail };
     }
   }
-
-  // @Get()
-  // findAll() {
-  //   return this.twitterService.findAll();
-  // }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.twitterService.findOne(+id);
-  // }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateTwitterDto: UpdateTwitterDto) {
-  //   return this.twitterService.update(+id, updateTwitterDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.twitterService.remove(+id);
-  // }
 }
