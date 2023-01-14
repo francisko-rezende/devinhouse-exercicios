@@ -6,6 +6,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { AuthService } from 'src/twitter/core/auth/auth.service';
+import { CredentialsDto } from './core/auth/dtos/credentials-dto';
 import { CreateTweetDto } from './dto/create-tweet.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { TwitterService } from './twitter.service';
@@ -32,6 +33,12 @@ export class TwitterController {
   @Post('user')
   async createUser(@Body() createUserDto: CreateUserDto) {
     return await this.authService.createUser(createUserDto);
+  }
+
+  @Post('sign-in')
+  async signIn(@Body() credentialsDto: CredentialsDto) {
+    const token = await this.authService.signIn(credentialsDto);
+    return { token };
   }
 
   // @Get()
