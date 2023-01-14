@@ -1,21 +1,21 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
-  Patch,
-  Param,
-  Delete,
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
+import { AuthService } from 'src/twitter/core/auth/auth.service';
 import { CreateTweetDto } from './dto/create-tweet.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { TwitterService } from './twitter.service';
 
 @Controller()
 export class TwitterController {
-  constructor(private readonly twitterService: TwitterService) {}
+  constructor(
+    private readonly twitterService: TwitterService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Post('tweet')
   async createTweet(@Body() createTweetDto: CreateTweetDto) {
@@ -31,7 +31,7 @@ export class TwitterController {
 
   @Post('user')
   async createUser(@Body() createUserDto: CreateUserDto) {
-    return await this.twitterService.createUser(createUserDto);
+    return await this.authService.createUser(createUserDto);
   }
 
   // @Get()
