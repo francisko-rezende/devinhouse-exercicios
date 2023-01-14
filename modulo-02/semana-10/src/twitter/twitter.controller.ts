@@ -12,6 +12,7 @@ import {
 import { AuthService } from 'src/twitter/core/auth/auth.service';
 import { ChangePasswordDto } from './core/auth/dtos/change-password.dto';
 import { CredentialsDto } from './core/auth/dtos/credentials-dto';
+import { GoogleOAuthGuard } from './core/auth/guards/google.guard';
 import { JwtAuthGuard } from './core/auth/guards/jwt-auth-guard';
 import { CreateTweetDto } from './dto/create-tweet.dto';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -25,6 +26,7 @@ export class TwitterController {
   ) {}
 
   @UseGuards(JwtAuthGuard)
+  @UseGuards(GoogleOAuthGuard)
   @Post('tweet')
   async createTweet(@Body() createTweetDto: CreateTweetDto, @Request() req) {
     try {
@@ -61,12 +63,14 @@ export class TwitterController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @UseGuards(GoogleOAuthGuard)
   @Get('/auth/me')
   async me(@Request() req) {
     return req.user;
   }
 
   @UseGuards(JwtAuthGuard)
+  @UseGuards(GoogleOAuthGuard)
   @Post('/auth/trocar-senha')
   async changePassword(
     @Request() req,
